@@ -15,7 +15,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export type GuildProps = {
   id: string,
   name: string,
-  icon: null,
+  icon: string | null,
   owner: boolean;
 }
 

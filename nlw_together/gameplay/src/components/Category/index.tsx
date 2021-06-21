@@ -35,11 +35,9 @@ export function Category({
           style={[styles.content, { opacity: checked ? 1 : 0.5 }]}
           colors={[ checked ? '#171F52' : secondary40, secondary40 ]}
         >
-          { hasCheckBox ? (
+          { hasCheckBox && (
             <View style={checked ? styles.checked : styles.check} />
-          ) : (
-            <View style={{ height: 12 }} />
-          ) }
+          )}
           
           <Icon
             width={48}

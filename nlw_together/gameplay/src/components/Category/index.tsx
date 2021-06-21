@@ -23,7 +23,7 @@ export function Category({
   ...rest
 
 }: Props) {
-  const { secondary40, secondary50, secondary70 } = theme.colors;
+  const { secondary40, secondary50, secondary70, secondary75 } = theme.colors;
 
   return (
     <RectButton {...rest}>
@@ -33,7 +33,7 @@ export function Category({
       >
         <LinearGradient 
           style={[styles.content, { opacity: checked ? 1 : 0.5 }]}
-          colors={[ checked ? '#171F52' : secondary40, secondary40 ]}
+          colors={[ checked ? secondary75 : secondary40, secondary40 ]}
         >
           { hasCheckBox && (
             <View style={checked ? styles.checked : styles.check} />

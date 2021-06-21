@@ -13,6 +13,7 @@ export function ModalView({ children, ...rest }: Props) {
     <Modal 
       transparent
       animationType="slide"
+      statusBarTranslucent
       {...rest}
     >
       <View style={styles.overlay}>

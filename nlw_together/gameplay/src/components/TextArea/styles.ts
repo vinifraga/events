@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.heading,
     textAlign: 'left',
     textAlignVertical: 'top',
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   }
 })

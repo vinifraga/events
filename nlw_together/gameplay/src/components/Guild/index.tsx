@@ -1,11 +1,17 @@
 import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
-import { GuildProps } from '../Appointment';
 import { GuildIcon } from '../GuildIcon';
 import { Feather } from '@expo/vector-icons';
 
 import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
+
+export type GuildProps = {
+  id: string,
+  name: string,
+  icon: string | null,
+  owner: boolean;
+}
 
 type Props = TouchableOpacityProps & {
   data: GuildProps

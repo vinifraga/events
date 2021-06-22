@@ -12,11 +12,11 @@ import { Button } from '../../components/Button';
 import { TextArea } from '../../components/TextArea';
 import { ModalView } from '../../components/ModalView';
 import { Guilds } from '../Guilds';
+import { GuildProps } from '../../components/Guild';
 
 import { theme } from '../../global/styles/theme';
 
 import { styles } from './styles';
-import { GuildProps } from '../../components/Appointment';
 
 export function AppointmentCreate() {
   const [category, setCategory] = useState('');
@@ -27,13 +27,17 @@ export function AppointmentCreate() {
     setIsGuildsModalOpen(true);
   }
 
+  function handleCloseGuildsModal() {
+    setIsGuildsModalOpen(false);
+  }
+
   function handleGuildSelect(guildSelected: GuildProps) {
     setGuild(guildSelected)
     setIsGuildsModalOpen(false);
   }
 
   function handleCategorySelect(categoryId: string) {
-    categoryId === category ? setCategory('') : setCategory(categoryId);
+    setCategory(categoryId);
   }
 
   return (
@@ -138,6 +142,7 @@ export function AppointmentCreate() {
 
         <ModalView
           visible={isGuildsModalOpen}
+          closeModal={handleCloseGuildsModal}
         >
           <Guilds handleGuildSelect={handleGuildSelect} />
         </ModalView>

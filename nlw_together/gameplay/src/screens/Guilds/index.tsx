@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { GuildProps } from '../../components/Appointment';
 
+import { GuildProps } from '../../components/Guild';
 import { Guild } from '../../components/Guild';
 import { ListDivider } from '../../components/ListDivider';
 
@@ -24,7 +24,43 @@ export function Guilds({ handleGuildSelect }: Props) {
       name: 'Lendários',
       icon: 'image.png',
       owner: true
-    }
+    },
+    {
+      id: '3',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '4',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '5',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '6',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '7',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
+    {
+      id: '8',
+      name: 'Lendários',
+      icon: 'image.png',
+      owner: true
+    },
   ]
 
   return (
@@ -42,6 +78,7 @@ export function Guilds({ handleGuildSelect }: Props) {
         ListHeaderComponent={() => <ListDivider isCentered />}
         showsVerticalScrollIndicator={false}
         style={styles.guilds}
+        contentContainerStyle={{ paddingBottom: 68, paddingTop: 104 }}
       />
     </View>
   );

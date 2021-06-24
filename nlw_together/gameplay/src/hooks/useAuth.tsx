@@ -1,7 +1,10 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useState, useEffect } from 'react';
 import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { api } from '../services/api';
+
+import { COLLECTION_USERS } from '../configs/database';
 
 const { SCOPE } = process.env;
 const { CLIENT_ID } = process.env;
@@ -20,8 +23,9 @@ type User = {
 
 type AuthContextData = {
   user: User;
-  signIn: () => Promise<void>;
   loading: boolean;
+  signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 type AuthProviderProps = {
@@ -57,11 +61,14 @@ function AuthProvider({ children }: AuthProviderProps) {
         const firstName = userInfo.data.username.split(' ')[0];
         userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`
 
-        setUser({
+        const userData = {
           ...userInfo.data,
           firstName,
           token: params.access_token
-        });
+        };
+
+        await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(userData))
+        setUser(userData);
       }
     } catch {
       throw new Error('Não foi possível autenticar');
@@ -70,8 +77,28 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signOut() {
+    setUser({} as User);
+    await AsyncStorage.removeItem(COLLECTION_USERS);
+  }
+
+  async function loadUserStorageData() {
+    const storage = await AsyncStorage.getItem(COLLECTION_USERS);
+
+    if (storage) {
+      const userLogged = JSON.parse(storage) as User;
+      api.defaults.headers.authorization = `Bearer ${userLogged.token}`;
+
+      setUser(userLogged);
+    }
+  }
+
+  useEffect(() => {
+    loadUserStorageData()
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, signIn, loading }}>
+    <AuthContext.Provider value={{ user, signIn, loading, signOut }}>
       { children }
     </AuthContext.Provider>
   )

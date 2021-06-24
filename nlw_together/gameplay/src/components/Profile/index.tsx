@@ -1,31 +1,25 @@
 import React from 'react';
+import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { useAuth } from '../../hooks/useAuth';
 
 import { Avatar } from '../Avatar';
+import { ModalSignOut } from '../ModalSignOut';
 
 import { styles } from './styles';
 
 export function Profile() {
   const { user, signOut } = useAuth();
+  const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
+
+  function handleCloseSignOutModal() {
+    setIsSignOutModalOpen(false);
+  }
 
   function handleSignOut() {
-    Alert.alert(
-      'Logout', 
-      'Deseja sair do Gameplay?',
-      [
-        {
-          text: 'Não',
-          style: 'cancel'
-        },
-        {
-          text: 'Sim',
-          onPress: signOut
-        }
-      ]
-    )
+    setIsSignOutModalOpen(true);
   }
 
   return (
@@ -51,6 +45,11 @@ export function Profile() {
         </Text>
       </View>
 
+
+      <ModalSignOut 
+        visible={isSignOutModalOpen}
+        closeModal={handleCloseSignOutModal}
+      />
     </View>
   );
 }

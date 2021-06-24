@@ -61,7 +61,6 @@ export function AppointmentDetails() {
     try {
       const response = await api.get(`/guilds/${guildId}/widget.json`);
       setWidget(response.data);
-      console.log(response.data);
     } catch (error) {
       Alert.alert(
       'Erro ao buscar dados do Widget do servidor',
